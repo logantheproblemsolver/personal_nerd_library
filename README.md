@@ -39,3 +39,4 @@ I want to implement a graphql database once I get a working MVP of this applicat
 * Create a better name for the project
 * I would absolutely love to figure out how to get comic book valuations 
 * Add testing, and add it to a github actions
+
