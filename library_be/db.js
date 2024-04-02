@@ -1,7 +1,8 @@
 require('dotenv').config();
-
-
 const knex = require('knex');
+const { attachPaginate } = require('knex-paginate');
+attachPaginate();
+
 
 console.log('db password', process.env.database_password)
 const db = knex({

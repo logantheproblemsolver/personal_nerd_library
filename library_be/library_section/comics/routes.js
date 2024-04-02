@@ -17,7 +17,7 @@ comicsRouter.get("/", (req, res) => {
 comicsRouter.get("/getcomicbooks", async (req, res) => {
   const pageNumber = req.query['page'] || 1;
   console.log(pageNumber);
-  const comicBooks = await getComicBooks(req.app.get("db"), 1);
+  const comicBooks = await getComicBooks(req.app.get("db"), 10, pageNumber);
   return res
     .status(200)
     .json({
