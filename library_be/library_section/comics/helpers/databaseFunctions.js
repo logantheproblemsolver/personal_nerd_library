@@ -1,8 +1,10 @@
 const ComicDatabaseService = {
-  getAllComicBooks(knex) {
+  getAllComicBooks(knex, perPage, pageNumber) {
+    console.log({ perPage, pageNumber  })
     return knex
       .select('title', 'name', 'description', 'number', 'cover_image')
       .from('comic_books')
+      .paginate({ perPage: perPage, currentPage: pageNumber, isLengthAware: true })
   },
   getComicBooksByStoryArc(knex) {
 

@@ -2,9 +2,9 @@ const ComicDatabaseService = require("./databaseFunctions.js");
 
 //need a function that gets first 30 comics from database and handles pagination
 
-const getComicBooks = async (db, page) => {
+const getComicBooks = async (db, perPage, page) => {
   console.log(page);
-  const comicBooks = await ComicDatabaseService.getAllComicBooks(db);
+  const comicBooks = await ComicDatabaseService.getAllComicBooks(db, parseInt(perPage), parseInt(page));
   return comicBooks;
 }
 
