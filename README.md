@@ -51,3 +51,5 @@ I want to implement a graphql database once I get a working MVP of this applicat
 * Add testing to be able to test it all
 * Figure out Row Level Security and how to add it to my applicaiton to make sure my database stays secure
 * Add true logging with npm package called winston
+
+#
