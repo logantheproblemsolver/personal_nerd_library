@@ -1,6 +1,6 @@
 const express = require('express');
 const { ISBNLookup, getComicByIssue } = require('./helpers/metronlookup');
-const { uploadComic, getComicBooks } = require('./helpers/functions');
+const { uploadComic, getComicBooks, getComicBooksByStoryArc, getComicBookById, getComicBooksByCharacter, getComicBooksByIssue, getComicBooksBySeries } = require('./helpers/functions');
 const comicsRouter = express.Router();
 
 
@@ -16,8 +16,21 @@ comicsRouter.get("/", (req, res) => {
 
 comicsRouter.get("/getcomicbooks", async (req, res) => {
   const pageNumber = req.query['page'] || 1;
-  console.log(pageNumber);
-  const comicBooks = await getComicBooks(req.app.get("db"), 10, pageNumber);
+  let comicBooks;
+  console.log(pageNumber); 
+  if (req.query['storyArc']) {
+    comicBooks = await getComicBooksByStoryArc(req.app.get("db"), req.query['storyArc'], 10, pageNumber);
+  } else if (req.query['character']) {
+    comicBooks = await getComicBooksByCharacter(req.app.get("db"), req.query['character'], 10, pageNumber);
+  } else if (req.query['issueName']) {
+    comicBooks = await getComicBooksByIssue(req.app.get("db"), req.query['issueName'], 10, pageNumber);
+  } else if (req.query['seriesName']) {
+    comicBooks = await getComicBooksBySeries(req.app.get("db"), req.query['seriesName'], 10, pageNumber);
+  } else if (req.query['comicBookId']) {
+    comicBooks = await getComicBookById(req.app.get("db"), req.query['comicBookId'], 10, pageNumber);
+  } else {
+    comicBooks = await getComicBooks(req.app.get("db"), 10, pageNumber);
+  }
   return res
     .status(200)
     .json({

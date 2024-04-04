@@ -40,6 +40,11 @@ build/Release
 
 # Dependency directories
 node_modules/
+*node_modules/
+library_be/node_modules
+/library_be/node_modules/
+/library_fe/node_modules/
+node_modules/*
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -128,3 +133,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+*storybook.log

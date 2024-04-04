@@ -40,3 +40,14 @@ I want to implement a graphql database once I get a working MVP of this applicat
 * I would absolutely love to figure out how to get comic book valuations 
 * Add testing, and add it to a github actions
 
+## To Do List for new features (so I don't forget)
+
+* Add a way to get comics by filters
+  * Search for comic books by name
+  * Search for comic books by character
+  * Search for comic books by story arc
+* Create a function that uploads the story arc and what comic book it's tied to
+* Create a function that uploads the character and what comic book it's tied to
+* Add testing to be able to test it all
+* Figure out Row Level Security and how to add it to my applicaiton to make sure my database stays secure
+* Add true logging with npm package called winston

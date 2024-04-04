@@ -2,18 +2,57 @@ const ComicDatabaseService = {
   getAllComicBooks(knex, perPage, pageNumber) {
     console.log({ perPage, pageNumber  })
     return knex
-      .select('title', 'name', 'description', 'number', 'cover_image')
+      .select('id', 'title', 'name', 'description', 'number', 'cover_image')
       .from('comic_books')
       .paginate({ perPage: perPage, currentPage: pageNumber, isLengthAware: true })
   },
-  getComicBooksByStoryArc(knex) {
-
+  getAllComicBooksByStoryArc(knex, storyArc, perPage, pageNumber) {
+    console.log("storyArc", storyArc);
+    return knex
+      .select('*')
+      .from('comic_book_with_story_arc')
+      .where('story_arc_name', '=', storyArc)
+      .paginate({ perPage: perPage, currentPage: pageNumber, isLengthAware: true })
   },
-  getComicBooksByCharacter(knex) {
-
+  getAllComicBooksByCharacter(knex, character, perPage, pageNumber) {
+    console.log("character", character);
+    return knex
+      .select('*')
+      .from('user_comic_books_with_characters')
+      .where('character_name', '=', character)
+      .paginate({ perPage: perPage, currentPage: pageNumber, isLengthAware: true })
   },
-  getComicBooksByIssue(knex) {
-
+  getAllComicBooksByIssue(knex, issueName, perPage, pageNumber) {
+    console.log("issue name: ", issueName);
+    return knex
+      .select('title', 'name', 'description', 'number', 'cover_image')
+      .from('comic_books')
+      .where('name', '=', issueName)
+      .paginate({ perPage: perPage, currentPage: pageNumber, isLengthAware: true })
+  },
+  getAllComicBooksBySeries(knex, seriesName, perPage, pageNumber) {
+    console.log('series name: ', seriesName);
+    return knex
+      .select('title', 'name', 'description', 'number', 'cover_image')
+      .from('comic_books')
+      .where('title', '=', seriesName)
+      .paginate({ perPage: perPage, currentPage: pageNumber, isLengthAware: true })
+  },
+  getAllComicBooksByCreators(knex, creatorName, perPage, pageNumber) {
+    console.log('creator name', creatorName);
+    return knex
+      .select('*')
+      .from('comic_books_and_creators')
+      .where('creator_name', '=', creatorName)
+      .paginate({ perPage: perPage, currentPage: pageNumber, isLengthAware: true })
+  },
+  getAllComicBookById(knex, comicBookId, perPage, pageNumber) {
+    console.log('comic book id', comicBookId);
+    return knex 
+      .select('*')
+      .from('comic_books')
+      .where('id', '=', comicBookId)
+      .paginate({ perPage: perPage, currentPage: pageNumber, isLengthAware: true })
   },
   uploadComicBook(knex, comicBookInfo) {
     return knex
@@ -38,6 +77,26 @@ const ComicDatabaseService = {
         "owner": comicBookInfo["owner"]
       })
       .into('comic_books')
+  },
+  uploadComicBookRelatedStoryArcs(knex, comicBookId, storyArcId) {
+    console.log('story arc id', storyArcId);
+    console.log('comic book id', comicBookId);
+    return knex 
+      .insert({
+        'comic_book': comicBookId,
+        'story_arc': storyArcId
+      })
+      .into('comic_book_with_story_arc')
+  },
+  uploadComicBookRelatedCharacters(knex, comicBookId, characterName, characterId) {
+    console.log('comic book id', comicBookId);
+    console.log('character name', characterName);
+    console.log('character id', characterId); 
+    return knex
+      .insert({
+        
+      })
+      .into('user_comic_books_with_characters')
   }
 };
 
